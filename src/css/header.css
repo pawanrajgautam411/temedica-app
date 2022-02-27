@@ -1,0 +1,18 @@
+.header {
+    text-align: left;
+    margin-top: 5%;
+   
+}
+
+.header img {
+    float: left;
+    width: 10%;
+    height: 10%;
+    margin-left: 20%;
+}
+
+.header a {
+    float: right;
+    margin-right: 20%;
+    padding-top: 5%;
+}
