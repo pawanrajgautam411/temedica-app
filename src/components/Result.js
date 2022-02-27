@@ -6,6 +6,8 @@ class Result extends Component {
 
     constructor() {
         super();
+        console.log("Result Construct");
+        this.createDrugHandler = this.createDrug.bind();
     }
 
     // create drug component
@@ -15,19 +17,40 @@ class Result extends Component {
             details={element} />;
     }
 
+    handleScroll(event) {
+        console.log(event);
+    }
+
     // create render component
     render() {
+
+        // document.addEventListener('scroll', (event) => console.log(event));
+        // debugger;
         const drugs = this.props.data.drugs;
 
-        const filterdDrugs = drugs.filter(o1 =>
-            o1.name.includes(this.props.searchedText));
+        const filterdDrugs = drugs.filter(o1 => {
+            return o1.name.toLowerCase()
+                .includes(this.props.searchedText.toLowerCase());
+        });
 
         console.log(this.props.searchedText);
 
-        return (
-            <div>
-                {filterdDrugs.map((element, index) => this.createDrug(element, index))}
-            </div>);
+        if (this.props.searchedText == undefined || this.props.searchedText === '') {
+            return (
+                <div id="no_results">No Results Found!</div>
+            );
+        } else {
+            return (
+                <div>
+                    <div id="showing_results">Showing {filterdDrugs.length} Results</div>
+                    <div  className="result">
+                        {filterdDrugs.map((element, index) => this.createDrugHandler(element, index))}
+                    </div>
+                </div>
+            );
+        }
+
+
 
     }
 }

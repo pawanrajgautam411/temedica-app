@@ -4,10 +4,29 @@ import Result from './Result';
 
 
 function Search() {
-    return (<div className="search">
-        <h2>Search</h2>
-        <input type="text" onChange={onSearchType.bind(this)} />
-    </div>);
+
+    // delaying the multiple 
+    const debouce = function () {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                onSearchType.apply(this, args);
+            }, 300);
+        };
+    }
+
+    return (
+        <div className="search">
+            <h2>Search</h2>
+
+            <input
+                type="text"
+                onChange={debouce(this)}
+                placeholder="Enter drug name" />
+
+        </div>
+    );
 }
 
 const onSearchType = function (input) {
@@ -19,15 +38,29 @@ const onSearchType = function (input) {
         .then(loadedJsonData.bind({ typedValue: typedValue }));
 }
 
+
+// loading json data into Result Component
 const loadedJsonData = function (data) {
-    //console.log(data);
+    console.log(data);
     // console.log(this.typedValue);
 
-    ReactDOM.render(
-        <Result
-            searchedText={this.typedValue}
-            data={data} />,
-        document.getElementById('result'));
+
+    var resultComp = <Result
+        searchedText={this.typedValue}
+        data={data} />;
+
+
+    var resultDomEle = document.getElementById('result');
+
+    const scrollHandler = function (event) {
+        if (this.resultDomEle.offsetHeight + this.resultDomEle.scrollTop >= this.resultDomEle.scrollHeight) {
+            console.log("At Bottom")
+        }
+    };
+
+    document.addEventListener('scroll', scrollHandler.bind({ resultDomEle }));
+
+    ReactDOM.render(resultComp, resultDomEle);
 
     return data;
 }
