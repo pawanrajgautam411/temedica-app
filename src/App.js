@@ -7,7 +7,7 @@ import './css/header.css';
 function App() {
 
   const appCSS = {
-    margin: "5% 20% 40%"
+    margin: "1% 20% 40%"
   }
 
   return (
