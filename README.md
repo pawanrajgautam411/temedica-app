@@ -1,5 +1,6 @@
 # Temedica App
 
+&nbsp;
 ## 1. Quick Info
 1. This is `react.js` project, which can be start after using `npm start`.
 
@@ -9,8 +10,13 @@
 
 4. The screenshots are attached in the email.
 
-
+&nbsp;
+&nbsp;
 ## 2. Things to notice
 1. The `debounce` function on the search text box, to avoid multiple calls in single search.
 
 2. The server side pagination using NextPage & PreviousPage clickable buttons.
+
+&nbsp;
+&nbsp;
+#### NOTE: The project might not look exactly the same as requested in coding challenge, but it is conceptually the same.
