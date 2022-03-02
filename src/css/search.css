@@ -14,14 +14,14 @@
     margin: auto;
     margin-top: 2%;
     /* height: width; */
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 
-    padding:4px;
+    /* padding:4px;
     height: 70vh;
-    overflow-x: hidden;
+    overflow-x: hidden;*/
     overflow-y: auto;
-    text-align:justify;
-    margin-bottom: 10%;
+    /* text-align:justify; */
+    margin-bottom: 10%; 
 }
 
 .drug_card {  
@@ -37,7 +37,7 @@
     /* padding-bottom: 12%; */
     background-color: #cacaca69;
     /* height: auto; */
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-bottom: 4%;
     border-radius: 10px;
     color: rgb(70 70 70);
@@ -95,6 +95,12 @@
 }
 #showing_results{
     text-align: center;
-    padding-bottom: 3%;
+    /* padding-bottom: 3%; */
     padding-top: 3%;
+}
+
+#next_page{
+    margin-left: 8%;
+    text-decoration: underline;
+    cursor: pointer;
 }

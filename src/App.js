@@ -1,5 +1,6 @@
 //import logo from './logo.svg';
 //import './App.css';
+import Result from './components/Result';
 import Search from './components/Search';
 import './css/header.css';
 
@@ -20,6 +21,7 @@ function App() {
       <Search />
 
       <div id="result" />
+        {/* <Result></Result> */}
     </div>
   );
 }
