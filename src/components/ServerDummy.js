@@ -5,6 +5,10 @@
  */
 function FetchData(successCallbackFunc, searchedContent) {
 
+
+    /* 
+        Only filters the data for callback, acts as responsive service
+    */
     const filterCallback = function (data) {
 
         const { searchedText, pageNumber, numberOfRecords } = searchedContent;
@@ -47,8 +51,10 @@ function FetchData(successCallbackFunc, searchedContent) {
 
     }
 
-
-    // fetchin only the json from dataset.json provided in the assignment
+    /*
+        fetchin only the json from dataset.json 
+        provided in the assignment
+    */
     const jsonData = fetch('data/dataset.json')
         .then(response => response.json())
         .then(filterCallback.bind(searchedContent));

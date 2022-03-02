@@ -3,7 +3,10 @@ import DrugData from '../components/DrugData'
 import loadedJsonData from './Search';
 import FetchData from './ServerDummy';
 
-
+/* 
+    the Result component is used for 
+    displaying the results in a specific div 
+*/
 class Result extends Component {
 
     constructor(props) {
@@ -19,17 +22,28 @@ class Result extends Component {
             totalRecords: 0
         };
 
+        /* 
+            fetch data is used for getting the 
+            filtered data from server replica 
+        */
         FetchData(this.set_state.bind(this), searchCriteria);
 
     }
 
-    // create drug component
+    /* 
+        creating only the DrugData component
+    */
     createDrug(element, index) {
         return <DrugData
             key={index}
             details={element} />;
     }
 
+
+    /* 
+        lifecycle method from React component,
+        used here for loading the data again if searched text changes
+    */
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.searchCriteria.searchedText != this.props.searchCriteria.searchedText) {
             // console.log("componentDidUpdate");
@@ -38,10 +52,11 @@ class Result extends Component {
         }
     }
 
-    // handling next page for server side pagination
+    /* 
+        event handler for onClick of NextPage button,
+        for handling next_page for server side pagination
+    */
     handleNextPage() {
-        // console.log(this.state.searchCriteria);
-
         let currentPage = this.state.searchCriteria.pageNumber + 1;
         let totalPages = this.state.totalRecords / this.state.searchCriteria.numberOfRecords;
 
@@ -65,8 +80,11 @@ class Result extends Component {
     }
 
 
-     // handling previous page for server side pagination
-     handlePreviousPage() {
+    /* 
+        event handler for onClick of Previous Page button,
+        handling previous page for server side pagination
+    */
+    handlePreviousPage() {
         // console.log(this.state.searchCriteria);
 
         let currentPage = this.state.searchCriteria.pageNumber;
@@ -89,7 +107,10 @@ class Result extends Component {
         FetchData(this.set_state.bind(this), searchedContent);
     }
 
-    // setting the state
+    /* 
+        setting the state from event handler like NextPage & PreviousPage,
+        also on change of searched text.
+    */
     set_state(data) {
         this.setState({
             searchCriteria: data.searchedContent,
@@ -98,9 +119,10 @@ class Result extends Component {
         });
     }
 
-    // create render component
+    /* 
+        the default render method
+    */
     render() {
-
         let { searchCriteria, drugs, totalRecords } = this.state;
         let { searchedText } = searchCriteria;
 
