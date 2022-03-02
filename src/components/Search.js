@@ -12,9 +12,10 @@ function Search() {
             <h2>Search</h2>
 
             <input
+                id = "search_box"
                 type="text"
                 onChange={debounce(this)}
-                placeholder="Enter drug name" />
+                placeholder="Enter Drug or Disease name" />
 
         </div>
     );

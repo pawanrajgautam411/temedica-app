@@ -155,9 +155,9 @@ class Result extends Component {
             return (
                 <div>
                     <div id="showing_results">
-                        <a id="previous_page" onClick={this.handlePreviousPage.bind(this)}>Previous Page</a>
+                        <button id="previous_page" onClick={this.handlePreviousPage.bind(this)}>Previous Page</button>
                         Showing Results: Page {currentPage} of {totalPages}
-                        <a id="next_page" onClick={this.handleNextPage.bind(this)}>Next Page</a>
+                        <button id="next_page" onClick={this.handleNextPage.bind(this)}>Next Page</button>
                     </div>
                     <div className="result">
                         {drugs.map((element, index) => this.createDrugHandler(element, index))}

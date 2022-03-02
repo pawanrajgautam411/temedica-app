@@ -13,7 +13,7 @@ function FetchData(successCallbackFunc, searchedContent) {
 
         const { searchedText, pageNumber, numberOfRecords } = searchedContent;
 
-        if(searchedText == undefined || searchedText === ""){
+        if (searchedText == undefined || searchedText === "") {
             successCallbackFunc({
                 searchedContent: searchedContent,
                 drugs: [],
@@ -24,8 +24,24 @@ function FetchData(successCallbackFunc, searchedContent) {
         }
 
         const filterdDrugs = data.drugs.filter(o1 => {
-            return o1.name.toLowerCase()
-                .includes(searchedText.toLowerCase());
+
+            debugger;
+            if (o1.name.toLowerCase().includes(searchedText.toLowerCase())) {
+                // searching the searched text in name of the drug
+                return true;
+            
+            } else {
+                // searching the searched text in name of the drug
+                var diseaseMatched = o1.diseases.find(str => {
+                    if (str.toLowerCase().includes(searchedText.toLowerCase())) {
+                        return true;
+                    }
+                });
+
+                if (diseaseMatched != undefined && diseaseMatched.length > 0) { 
+                    return true; 
+                }
+            }
         });
 
         if (pageNumber == undefined) {
