@@ -23,10 +23,6 @@ class Result extends Component {
 
     }
 
-    getDrivedStateFromProps(props, state) {
-        console.log("getDrivedStateFromProps", props, state);
-    }
-
     // create drug component
     createDrug(element, index) {
         return <DrugData
@@ -38,19 +34,19 @@ class Result extends Component {
         if (prevProps.searchCriteria.searchedText != this.props.searchCriteria.searchedText) {
             // console.log("componentDidUpdate");
             FetchData(this.set_state.bind(this), this.props.searchCriteria);
-            console.log(this);
+            // console.log(this);
         }
     }
 
-    // handling next page
+    // handling next page for server side pagination
     handleNextPage() {
-        console.log(this.state.searchCriteria);
+        // console.log(this.state.searchCriteria);
 
         let currentPage = this.state.searchCriteria.pageNumber + 1;
         let totalPages = this.state.totalRecords / this.state.searchCriteria.numberOfRecords;
 
-            if(currentPage >= totalPages){
-            alert("no more data to display");
+        if (currentPage >= totalPages) {
+            alert("No more data to display, try searching again");
             return;
         }
 
@@ -64,7 +60,32 @@ class Result extends Component {
             numberOfRecords: numberOfRecords
         };
 
-        console.log(searchedContent);
+        // console.log(searchedContent);
+        FetchData(this.set_state.bind(this), searchedContent);
+    }
+
+
+     // handling previous page for server side pagination
+     handlePreviousPage() {
+        // console.log(this.state.searchCriteria);
+
+        let currentPage = this.state.searchCriteria.pageNumber;
+        if (currentPage < 1) {
+            alert("No more data to display, try searching again");
+            return;
+        }
+
+        let { searchedText, pageNumber, numberOfRecords } = this.props.searchCriteria;
+
+        var newPageNumber = this.state.searchCriteria.pageNumber - 1;
+
+        let searchedContent = {
+            searchedText: searchedText,
+            pageNumber: newPageNumber,
+            numberOfRecords: numberOfRecords
+        };
+
+        // console.log(searchedContent);
         FetchData(this.set_state.bind(this), searchedContent);
     }
 
@@ -74,13 +95,11 @@ class Result extends Component {
             searchCriteria: data.searchedContent,
             drugs: data.drugs,
             totalRecords: data.totalRecords
-        }, () => console.log("state has been set"));
+        });
     }
 
     // create render component
     render() {
-
-        console.log("render called!", this.state);
 
         let { searchCriteria, drugs, totalRecords } = this.state;
         let { searchedText } = searchCriteria;
@@ -98,11 +117,7 @@ class Result extends Component {
         }
 
         let currentPage = searchCriteria.pageNumber + 1;
-        let totalPages = totalRecords / searchCriteria.numberOfRecords;
-
-        if (totalPages < 1) {
-            totalPages = 1;
-        }
+        let totalPages = Math.ceil(totalRecords / searchCriteria.numberOfRecords);
 
         if (drugs.length == totalRecords) {
             return (
@@ -117,7 +132,9 @@ class Result extends Component {
         } else {
             return (
                 <div>
-                    <div id="showing_results">Showing Results: Page {currentPage} of {totalPages}
+                    <div id="showing_results">
+                        <a id="previous_page" onClick={this.handlePreviousPage.bind(this)}>Previous Page</a>
+                        Showing Results: Page {currentPage} of {totalPages}
                         <a id="next_page" onClick={this.handleNextPage.bind(this)}>Next Page</a>
                     </div>
                     <div className="result">

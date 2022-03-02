@@ -96,11 +96,19 @@
 #showing_results{
     text-align: center;
     /* padding-bottom: 3%; */
-    padding-top: 3%;
+    padding-top: 4%;
 }
 
 #next_page{
     margin-left: 8%;
     text-decoration: underline;
     cursor: pointer;
+    color: blue;
+}
+
+#previous_page{
+    margin-right: 8%;
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
 }
